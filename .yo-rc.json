@@ -1,0 +1,11 @@
+{
+  "generator-mendix": {
+    "promptValues": {
+      "copyright": "ShelterBox 2019",
+      "license": "Apache 2",
+      "author": "Olly Spooner",
+      "boilerplate": "empty",
+      "widgetoptions": []
+    }
+  }
+}
