@@ -73,4 +73,4 @@ It may be useful to have access to not only the formatted number, but also alter
   1. Add additional attributes for each formatted number you want to store (in addition to the original one).
   2. In Data/Phone number Attributes, map each of these attributes to a format (do not map the original attribute).
 
-If you like this widget, please consider supporting the developer of the original code. You may also want to [make a donation to ShelterBox](shelterbox.org)!
+If you like this widget, please consider [supporting the developer of the original code](https://github.com/sponsors/jackocnr). You may also want to [make a donation to ShelterBox](shelterbox.org)!
