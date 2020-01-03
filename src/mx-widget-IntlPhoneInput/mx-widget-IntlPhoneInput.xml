@@ -89,6 +89,16 @@
             </enumerationValues>
         </property>
 
+        <property key="placeholderNumberTypeAttribute" type="attribute" required="false" >
+            <caption>... attribute for placeholder number type</caption>
+            <category>Display</category>
+            <description>If set, the value of this attribute will override the "placeholder number type" setting. The attribute can be a string or an enumeration containing a subset of: FIXED_LINE, MOBILE, FIXED_LINE_OR_MOBILE, TOLL_FREE, PREMIUM_RATE, SHARED_COST, VOIP, PERSONAL_NUMBER, PAGER, UAN, VOICEMAIL and UNKNOWN. Note that not all values will result in a valid placeholder for all countries.</description>
+            <attributeTypes>
+                <attributeType name="String" />
+                <attributeType name="Enum" />
+            </attributeTypes>
+        </property>
+
         <property key="separateDialCode" type="boolean" defaultValue="false">
             <caption>Separate dial code</caption>
             <category>Display</category>
@@ -118,6 +128,15 @@
             </enumerationValues>
         </property>
 
+        <property key="initialCountryAttribute" type="attribute" required="false" >
+            <caption>... attribute for initial country</caption>
+            <category>Countries</category>
+            <description>If set to an attribute, this will override the "Initial country" setting. The selected attribute will also be updated to the country selected in the widget.</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+
         <property key="preferredCountries" type="object" isList="true" required="false">
             <caption>Preferred countries</caption>
             <category>Countries</category>
@@ -137,7 +156,8 @@
         <property key="onlyCountries" type="object" isList="true" required="false">
             <caption>Only include countries</caption>
             <category>Countries</category>
-            <description>Specify the countries to appear at the top of the list.</description>
+            <description>Only show the countries in this list.</description>
+            <properties>
                 <property key="country" type="enumeration" required="true" defaultValue="af">
                     <caption>Country</caption>
                     <category>General</category>

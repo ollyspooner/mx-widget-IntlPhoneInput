@@ -31,6 +31,7 @@ define( [
         autoHideDialCode: null,
         autoPlaceholder: "",
         placeholderNumberType: "",
+        placeholderNumberTypeAttribute: null,
         separateDialCode: null,
         
         //Formatting tab
@@ -39,6 +40,7 @@ define( [
 
         //Countries tab 
         initialCountry: "",
+        initialCountryAttribute: null,
         preferredCountries: [],
         onlyCountries: [],
         excludeCountries: [],
@@ -60,11 +62,22 @@ define( [
 
         // Called as the client applies context to the widget (i.e. the widget has data).
         update: function ( obj, callback ) {
+            this._contextObj = obj;
             var this2 = this;
 
             logger.debug( this.id + ".update" );
 
             var inputElement = document.querySelector( "." + this.phoneNumberSelector + " input" );
+
+            var placeholderNumberType = this.placeholderNumberType;
+            if( this.placeholderNumberTypeAttribute != "" ) {
+                placeholderNumberType = this._contextObj.get( this.placeholderNumberTypeAttribute );
+            }
+
+            var initialCountry = this.initialCountry;
+            if( this.initialCountryAttribute != "" ) {
+                initialCountry = this._contextObj.get( this.initialCountryAttribute );
+            }
 
             var excludeCountries = [];
             for( var i = 0; i < this.excludeCountries.length; i++ ) {
@@ -92,28 +105,32 @@ define( [
                 autoPlaceholder: this.autoPlaceholder,
                 excludeCountries: excludeCountries,
                 formatOnDisplay: this.formatOnDisplay,
-                initialCountry: this.initialCountry,
+                initialCountry: initialCountry,
                 localizedCountries: localizedCountries,
                 nationalMode: this.nationalMode,
                 onlyCountries: onlyCountries,
-                placeholderNumberType: this.placeholderNumberType,
+                placeholderNumberType: placeholderNumberType,
                 preferredCountries: preferredCountries,
                 separateDialCode: this.separateDialCode,
 
                 utilsScript: "../../build/js/utils.js?1575016932390" // just for formatting/placeholders etc
             } );
 
-            inputElement.addEventListener( 'change', function() {
+            var keyupHandler = function() {
                 for( var i = 0; i < this2.phoneNumberAttributes.length; i++ ) {
                     var attribute = this2.phoneNumberAttributes[i];
                     var number = iti.getNumber( intlTelInputUtils.numberFormat[ attribute.phoneNumberAttributeFormat ] );
                     this2._contextObj.set( attribute.phoneNumberAttribute, number );
                 }
+                if( this2.initialCountryAttribute != null ) {
+                    this2._contextObj.set( this2.initialCountryAttribute, iti.selectedCountryData.iso2 );
+                }
                 this2._updateRendering( callback );
-            } );
-            
-            this._contextObj = obj;
-            this._updateRendering( callback );
+            }
+
+            inputElement.addEventListener( 'keyup', keyupHandler );
+
+            keyupHandler();
         },
 
         resize: function ( box ) {
