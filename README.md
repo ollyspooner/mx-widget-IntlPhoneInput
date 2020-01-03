@@ -37,6 +37,9 @@ Set the input's placeholder to an example number for the selected country, and u
 #### Placeholder number type
 Specify the type of number for the placeholder.
 
+#### ... attribute for placeholder number type
+Specify the type of number for the placeholder as an attribute. If set, the value of this attribute will override the "placeholder number type" setting. The attribute can be a string or an enumeration containing a subset of: FIXED_LINE, MOBILE, FIXED_LINE_OR_MOBILE, TOLL_FREE, PREMIUM_RATE, SHARED_COST, VOIP, PERSONAL_NUMBER, PAGER, UAN, VOICEMAIL and UNKNOWN. Note that not all values will result in a valid placeholder for all countries.
+
 #### Separate dial code
 Display the country dial code next to the selected flag so it's not part of the typed number. Note that this will disable nationalMode because technically we are dealing with international numbers, but with the dial code separated.
 
@@ -49,7 +52,10 @@ Allow users to enter national numbers (and not have to think about international
 
 ### Countries
 #### Initial country
-Slect the couintry to be selected by default. You can also set it to "auto", which will lookup the user's country based on their IP address (requires the geoIpLookup option which may or may not work...). Note that the "auto" option will not update the country selection if the input already contains a number.
+Select the couintry to be selected by default. You can also set it to "auto", which will lookup the user's country based on their IP address (requires the geoIpLookup option which may or may not work...). Note that the "auto" option will not update the country selection if the input already contains a number.
+
+#### ... attribute for initial country
+If set to an attribute, this will override the "Initial country" setting. The selected attribute will also be updated to the country selected in the widget.
 
 #### Preferred countries
 Specify the countries to appear at the top of the list.
