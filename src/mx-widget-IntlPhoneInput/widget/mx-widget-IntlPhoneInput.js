@@ -116,6 +116,8 @@ define( [
                 utilsScript: "../../build/js/utils.js?1575016932390" // just for formatting/placeholders etc
             } );
 
+            var countryElements = document.querySelectorAll( "." + this.phoneNumberSelector + " .iti__country-list > .iti__country" );
+
             var keyupHandler = function() {
                 for( var i = 0; i < this2.phoneNumberAttributes.length; i++ ) {
                     var attribute = this2.phoneNumberAttributes[i];
@@ -128,8 +130,28 @@ define( [
                 this2._updateRendering( callback );
             }
 
-            inputElement.addEventListener( 'keyup', keyupHandler );
+            var countrySelectHandler = function() {
+                if( this2.initialCountryAttribute != null ) {
+                    var countryCode = this.dataset.countryCode;
+                    if( typeof countryCode != 'undefined' ) {
+                        this2._contextObj.set( this2.initialCountryAttribute, countryCode );
+                    }
+                }
+                setTimeout( function() {
+                    for( var i = 0; i < this2.phoneNumberAttributes.length; i++ ) {
+                        var attribute = this2.phoneNumberAttributes[i];
+                        var number = iti.getNumber( intlTelInputUtils.numberFormat[ attribute.phoneNumberAttributeFormat ] );
+                        this2._contextObj.set( attribute.phoneNumberAttribute, number );
+                    }
+                }, 500 );
+                this2._updateRendering( callback );
+            }
 
+            inputElement.addEventListener( 'keyup', keyupHandler );
+            for( var i = 0; i < countryElements.length; i++ ) {
+                var countryCode = countryElements[i].dataset.countryCode;
+                countryElements[i].addEventListener( 'mouseup', countrySelectHandler );
+            }
             keyupHandler();
         },
 
