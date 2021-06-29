@@ -26,6 +26,7 @@ define( [
 
         //Display tab
         phoneNumberSelector: "",
+        restrictToSiblings: "",
         phoneNumberAttributes: [],
         allowDropdown: null,
         autoHideDialCode: null,
@@ -67,7 +68,13 @@ define( [
 
             logger.debug( this.id + ".update" );
 
-            var inputElement = document.querySelector( "." + this.phoneNumberSelector + " input" );
+            if( this.restrictToSiblings == false ){
+                var inputElement = document.querySelector( "." + this.phoneNumberSelector + " input" );
+            } else {
+                var parent = this.srcNodeRef.parentNode;
+                var inputElement = parent.querySelector( "." + this.phoneNumberSelector + " input" );
+            }
+
 
             var placeholderNumberType = this.placeholderNumberType;
             if( this.placeholderNumberTypeAttribute != "" ) {

@@ -13,6 +13,12 @@
             <description>A class added to a text box containing the phone number to be validated.</description>
         </property>
 
+        <property key="restrictToSiblings" type="boolean" defaultValue="false">
+            <caption>Restrict selection to siblings</caption>
+            <category>Data</category>
+            <description>Restrict the above selection to elements that are siblings of the widget.</description>
+        </property>
+
         <property key="phoneNumberAttributes" type="object" isList="true" required="false">
             <caption>Phone number attributes</caption>
             <category>Data</category>
